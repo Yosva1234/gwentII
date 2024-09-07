@@ -12,7 +12,7 @@ namespace gwentii
       Ranged,
       Siege
    }
-
+//
   public enum cardtype
   {
    oro,

@@ -13,7 +13,7 @@ public class hacertokens : MonoBehaviour
 {
 
    
-
+//
     public TMP_Text texto, errors; 
     
     

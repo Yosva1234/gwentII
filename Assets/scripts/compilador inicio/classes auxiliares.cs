@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-
+//
 namespace gwentii{
 public class Param 
 {

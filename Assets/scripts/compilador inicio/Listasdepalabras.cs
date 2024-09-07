@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace gwentii{
 public class Listasdepalabras 
-{
+{//
    
    public List <string> delimitadores = new List<string>();
    public List <string> operadoreslogicos = new List<string>();

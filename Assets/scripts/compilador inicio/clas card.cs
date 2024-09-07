@@ -348,7 +348,7 @@ public class hacercartas
 
 
 
-           
+           //
            Card nuevacarta = new Card(carname,power,tipodecarta,faction);
 
 

@@ -64,7 +64,7 @@ public class metodosauxiliares
             return tokenlist;
     
         }
-
+//
         void guardar ( string s , List<Token> tokenlist, Listasdepalabras listas, int fila,int columna)
         {
 

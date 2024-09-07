@@ -18,7 +18,7 @@ public class Effect
     {
         this.name = name;
     }
-
+//
 
    public Dictionary <string,object> Params = new Dictionary<string, object>();
 

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace gwentii{
 public class Token 
 {
-   
+   //
    public string name{get;}
    int fila {get;}
    int columna{get;}

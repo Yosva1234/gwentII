@@ -12,8 +12,8 @@ using System.Linq;
 namespace gwentii{
 public class comprobaciones 
 {
-
-    //---------------------------------------------------------------- COMPROBANDO LOS DELIMITADORES
+//
+    //--------------------/-------------------------------------------- COMPROBANDO LOS DELIMITADORES
     public bool comprobardelimitadores( List <Token> tokenlist, TMP_Text errors)
     {
 
