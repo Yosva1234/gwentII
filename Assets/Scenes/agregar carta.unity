@@ -341,13 +341,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 522121166}
-  - component: {fileID: 522121165}
+  - component: {fileID: 522121167}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -408,20 +408,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &522121165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522121164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e34ad5e629de34781a3753a213693e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  compilador: {fileID: 1827964215}
-  interfazerrors: {fileID: 431156387}
 --- !u!4 &522121166
 Transform:
   m_ObjectHideFlags: 0
@@ -438,6 +424,20 @@ Transform:
   - {fileID: 802090025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &522121167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522121164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a51b1e37089da41ad4ace12e6c99d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texto: {fileID: 1827964215}
+  errors: {fileID: 431156387}
 --- !u!1 &802090021
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,9 +924,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522121165}
-        m_TargetAssemblyTypeName: codigomatriz, Assembly-CSharp
-        m_MethodName: runbutton
+      - m_Target: {fileID: 522121167}
+        m_TargetAssemblyTypeName: gwentii.hacertokens, Assembly-CSharp
+        m_MethodName: RUN
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
