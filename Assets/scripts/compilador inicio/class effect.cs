@@ -49,7 +49,7 @@ public class Effect
 
 }
 
-// --------------------------------------------------- CREO LOS EFECTOS 
+// ----------------------------¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿----------------------- CREO LOS EFECTOS 
   public class hacerefect
   {
 
@@ -67,7 +67,7 @@ public class Effect
           if(tokenlist[x].name == "(") cparentesis++;
           if(tokenlist[x].name == ")") cparentesis++;
 
-          if(tokenlist[x].name == "Effect")
+          if(tokenlist[x].name == "effect")
           {
             if(ccorchetes != 0 || cparentesis!=0 || cllaves!=0) 
             {

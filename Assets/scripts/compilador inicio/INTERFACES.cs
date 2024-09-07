@@ -21,7 +21,8 @@ namespace gwentii
    lider,
    aumento,
    despeje,
-   senuelo
+   senuelo,
+   error
 
   }
 
