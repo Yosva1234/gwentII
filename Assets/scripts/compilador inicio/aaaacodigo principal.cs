@@ -7,35 +7,74 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEditor.AnimatedValues;
 
 namespace gwentii{
-public class hacertokens : MonoBehaviour
+public class compila : MonoBehaviour
 {
 
    
 //
-    public TMP_Text texto, errors; 
-    
-    
-
-    public void RUN()
-    {
-        errors.text="";
-
+    public string texto, errors; 
      metodosauxiliares metodos = new metodosauxiliares();
      comprobaciones comprobarerrores = new comprobaciones();
      hacerefect parcerdeefectro = new hacerefect();
      hacercartas parcearcartas = new hacercartas();
+     
 
-     List <Token> tokenlist = metodos.codigoconverttotoken(texto.text);  
-     List<Effect> effectlist = new List<Effect>();
-     List<Card> cardlist = new List<Card>();
+    
+      public static  List<Effect> effectlist = new List<Effect>();
+      public static  List<Card> cardlist = new List<Card>();
+
+
+     
+
+    
+
+    public void RUN()
+    {
+        errors="";
+
+      List <Token> tokenlist = metodos.codigoconverttotoken(texto);  
 
      if(comprobarerrores.comprobardelimitadores(tokenlist,errors)) return ; 
-     if(parcerdeefectro.asignacion(tokenlist,effectlist,errors)) Debug.Log("hay error");
-     if(parcearcartas.asignacion(tokenlist,cardlist,errors)) Debug.Log("hay error");
+
+        
+
+     if(parcerdeefectro.asignacion(tokenlist,effectlist,errors)) return;
 
 
+     if(parcearcartas.asignacion(tokenlist,cardlist,errors)) return;
+
+    /* foreach( Card carta in cardlist)
+     {
+         Debug.Log(carta.Name);
+
+        foreach( Effect ecefto in carta.efectosdelacarta)
+        {
+            Debug.Log(ecefto.name);
+            foreach(var param in ecefto.Params)
+            {
+                Debug.Log(param.Key);
+                Debug.Log(param.Value.ToString());
+            }
+           
+        }
+     }
+     */
+
+     foreach(Effect effect in effectlist)
+     {
+        Debug.Log(effect.tokenactions.Count);
+     }
+
+       codigogenerator.sobrescribiracrcivo(effectlist);
+
+
+/*
+            Debug.Log("yes");
+
+        // cambiar camara para la posicion del campo de juego      
       
         for (int x = 0; x<effectlist.Count; x++)
         {
@@ -54,12 +93,17 @@ public class hacertokens : MonoBehaviour
         for (int x = 0; x<cardlist.Count; x++)
         {
 
-          Debug.Log(cardlist[x].name);
-          Debug.Log(cardlist[x].power);
-          Debug.Log(cardlist[x].tipo.ToString());
-          Debug.Log(cardlist[x].faction);
+          Debug.Log(cardlist[x].Name);
+          Debug.Log(cardlist[x].Power);
+          Debug.Log(cardlist[x].Type.ToString());
+          Debug.Log(cardlist[x].Faction);
 
         }
+        
+*/
+
+
+
 
 
 
@@ -160,6 +204,8 @@ card
                         Name: "Damage",
                         Amount: 5,
                     },
+
+
                     Selector: {
                         Source: "board",
                         Single: false,
@@ -185,6 +231,134 @@ card
         }
 
 
-
+card
+    {
+        Type: "Oro",
+        Name: "El lindo",
+        Faction: "Elementales",
+        Power: 10,
+        Range: ["Melee", "Ranged"],
+        OnActivation:
+        [
+            {
+                Effect:
+                {
+                    Name: "Damage",
+                    Amount: 2,
+                },
+                Selector:
+                {
+                    Source: "board",
+                    Single: false,
+                    Predicate: (unit) => unit.Faction == "Celestial"
+                },
+            },
+        ]
+    }  
+    card
+    {
+        Type: "Oro",
+        Name: "El feo",
+        Faction: "Elementales",
+        Power: 10,
+        Range: ["Melee", "Ranged"],
+        OnActivation:
+        [
+            {
+                Effect:
+                {
+                    Name: "Damage",
+                    Amount: 2,
+                },
+                Selector:
+                {
+                    Source: "board",
+                    Single: false,
+                    Predicate: (unit) => unit.Faction == "Dark"
+                },
+            },
+        ]
+    }  
+    card
+    {
+        Type: "Oro",
+        Name: "El lindo 45",
+        Faction: "Elementales",
+        Power: 10,
+        Range: ["Melee", "Ranged"],
+        OnActivation:
+        [
+            {
+                Effect:
+                {
+                    Name: "Draw",
+                },
+            },
+        ]
+    }  
+    card
+    {
+        Type: "Oro",
+        Name: "El feo+",
+        Faction: "Elementales",
+        Power: 10,
+        Range: ["Melee", "Ranged"],
+        OnActivation:
+        [
+            {
+                Effect:
+                {
+                    Name: "Draw",
+                },
+            },
+        ]
+    }   
+    card
+    {
+        Type: "Oro",
+        Name: "El lindo++",
+        Faction: "Elementales",
+        Power: 10,
+        Range: ["Melee", "Ranged"],
+        OnActivation:
+        [
+            {
+                Effect:
+                {
+                    Name: "ReturnToDeck",
+                },
+                Selector:
+                {
+                    Source: "board",
+                    Single: false,
+                    Predicate: (unit) => unit.Power  < 4 
+                },
+            },
+        ]
+    }  
+    card
+    {
+        Type: "Oro",
+        Name: "El feo++",
+        Faction: "Elementales",
+        Power: 10,
+        Range: ["Melee", "Ranged"],
+        OnActivation:
+        [
+            {
+                Effect:
+                {
+                     Name: "ReturnToDeck",
+                },
+                Selector:
+                {
+                    Source: "board",
+                    Single: false,
+                    Predicate: (unit) =>  unit.Power  < 4
+                }, 
+            },
+        ]
+    }  
+  
 
  */

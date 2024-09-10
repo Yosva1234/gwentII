@@ -11,7 +11,7 @@ using Unity.VisualScripting;
 using System.Runtime.CompilerServices;
 
 namespace gwentii{
-public class Card
+public class SCard
 {
   public cardtype tipo {get ;}
   public string name {get ;}
@@ -19,7 +19,7 @@ public class Card
   public string faction{get;}
   public List<rangetype> ranges{get ;}
 
-  public Card(string name, int power, cardtype tipo, string faction)
+  public SCard(string name, int power, cardtype tipo, string faction)
   {
     this.name = name;
     this.power = power;
@@ -40,7 +40,7 @@ public class Card
 public class hacercartas
 {
 
-    public bool asignacion ( List <Token> tokenlist, List <Card> cardlist, TMP_Text errors )
+    public bool asignacion ( List <Token> tokenlist, List <Card> cardlist, string errors )
       {
         
         int ccorchetes = 0, cparentesis = 0, cllaves  = 0;
@@ -58,7 +58,7 @@ public class hacercartas
           {
             if(ccorchetes != 0 || cparentesis!=0 || cllaves!=0) 
             {
-              errors.text = tokenlist[x].error();
+              errors = tokenlist[x].error();
               return true;
             }
 
@@ -66,7 +66,7 @@ public class hacercartas
 
             if(endeffect == -1) 
             {
-              errors.text = tokenlist[x].error();
+              errors = tokenlist[x].error();
               return true;
             }
 
@@ -146,7 +146,7 @@ public class hacercartas
           }
           }
         
-            //Debug.Log(name);
+           
             carname = name;
 
           //------------------------------------------------------------------ vamos a buscar el tipo
@@ -154,7 +154,7 @@ public class hacercartas
         
             ccorchetes = 0; cparentesis = 0; cllaves  = 0; posname = 0; endname = 0; 
 
-           cardtype tipodecarta = cardtype.error;
+           CardType tipodecarta = CardType.error;
            name = "";
 
           for (int x = pos; x<endcard; x++)
@@ -191,13 +191,13 @@ public class hacercartas
           }
           }
           
-          if (name == "Oro") tipodecarta = cardtype.oro;
-          if (name == "Plata") tipodecarta = cardtype.plata;
-          if( name == "Clima") tipodecarta = cardtype.clima;
-          if ( name == "Lider") tipodecarta = cardtype.lider;
-          if ( name == "Aumento") tipodecarta = cardtype.aumento;
+          if (name == "Oro") tipodecarta = CardType.oro;
+          if (name == "Plata") tipodecarta = CardType.plata;
+          if( name == "Clima") tipodecarta = CardType.clima;
+          if ( name == "Lider") tipodecarta = CardType.lider;
+          if ( name == "Aumento") tipodecarta = CardType.aumento;
 
-          if(tipodecarta == cardtype.error) return -1;
+          if(tipodecarta == CardType.error) return -1;
           //Debug.Log(tipodecarta.ToString());
 
           //---------------------------------------------------------------------------- vamos a buscar la faccion
@@ -348,16 +348,191 @@ public class hacercartas
 
 
 
-           //
-           Card nuevacarta = new Card(carname,power,tipodecarta,faction);
+           
+           
 
+
+            List <rangetype> rang = new List<rangetype>();
 
           for (int x = 0; x<rangos.Count; x++)
           {
-            if(rangos[x] == "Melee") nuevacarta.addrange(rangetype.Melee);
-            if(rangos[x] == "Ranged")nuevacarta.addrange(rangetype.Ranged);
-            if(rangos[x] == "Siege") nuevacarta.addrange(rangetype.Siege);
+            if(rangos[x] == "Melee") rang.Add(rangetype.Melee);
+            if(rangos[x] == "Ranged")rang.Add(rangetype.Ranged);
+            if(rangos[x] == "Siege") rang.Add(rangetype.Siege);
           }
+
+          Card nuevacarta = new Card(carname,power,tipodecarta,faction,rang);
+
+
+
+         ccorchetes = 0; cparentesis = 0; cllaves  = 0;
+
+                  
+                
+        for (int x = pos; x<endcard; x++)
+        {
+
+
+          //Debug.Log(tokenlist[x].name);
+          if(tokenlist[x].name == "[") ccorchetes++;
+          if(tokenlist[x].name == "]") ccorchetes--;
+          if(tokenlist[x].name == "{") cllaves++;
+          if(tokenlist[x].name == "}") cllaves--;
+          if(tokenlist[x].name == "(") cparentesis++;
+          if(tokenlist[x].name == ")") cparentesis++;
+
+          
+
+          if(tokenlist[x].name == "Effect")
+          {
+            if(ccorchetes != 1 || cparentesis!=0 || cllaves!=2 || tokenlist[x+2].name != "{" || tokenlist[x+1].name != ":") 
+            {
+
+              //Debug.Log("partido");
+              
+             continue;
+
+            }
+                
+             int posaux = x+2;
+
+            int endeffect = -1; ccaux=0;
+
+          for (int j = posaux; j<tokenlist.Count; j++)
+          {
+          if(tokenlist[j].name == "{") ccaux++;
+          if(tokenlist[j].name == "}") ccaux--;
+
+          if(ccaux == 0)
+          {
+            endeffect = j+1;
+            break;
+          }
+          }
+
+          if (endeffect == -1) return -1;
+                
+         
+
+            // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ buscamos el nombre del efecto
+
+            int  ccorchetesaux = 0, cparentesisaux = 0, cllavesaux  = 0, posnameaux = 0;
+
+           name = "";
+
+          for (int j = posaux; j<endeffect; j++)
+          {
+
+          if(tokenlist[j].name == "[") ccorchetesaux++;
+          if(tokenlist[j].name == "]") ccorchetesaux--;
+          if(tokenlist[j].name == "{") cllavesaux++;
+          if(tokenlist[j].name == "}") cllavesaux--;
+          if(tokenlist[j].name == "(") cparentesisaux++;
+          if(tokenlist[j].name == ")") cparentesisaux--;
+
+           if(tokenlist[j].name == "Name")
+          {
+            posnameaux = j+3;
+            if(ccorchetesaux != 0 || cparentesisaux!=0 || cllavesaux!=1 || tokenlist[j+1].name!=":" || tokenlist[j+2].name!='"'.ToString()) return -1;
+
+                // Debug.Log("yes");
+
+            for (int i =  posnameaux; i<endeffect; i++)
+            {
+
+              if(tokenlist[i].name =='"'.ToString()) 
+              {
+                break;
+              }
+
+              name+=tokenlist[i].name;
+            }
+
+            if(name == "" ) return -1;
+
+             posaux+=7;
+
+            break;
+
+             
+
+          }
+          }
+
+          //\=============================================================oooo====================oooooooooooo============oooooo
+
+
+              
+
+            Effect efectoparceado = null;
+
+           // Debug.Log(compila.effectlist.Count);
+
+
+            foreach ( Effect effectcreated in compila.effectlist)
+            {
+
+                if(effectcreated.name == name)
+                {
+                  efectoparceado = new Effect(effectcreated);
+                  break;
+                }
+
+            }
+
+            //Debug.Log(posaux);
+            //Debug.Log(endeffect);
+
+            for (int j = posaux; j < endeffect; j+=4 )
+            {
+
+              if (tokenlist[j].name == "}") break;
+              
+             // Debug.Log(tokenlist[j].name);
+
+              if(tokenlist[j].tipo!= tokentype.identificadores || tokenlist[j+1].name!=":" || tokenlist[j+2].tipo!= tokentype.identificadores || tokenlist[j+3].name!= ",") return -1;
+             
+
+              if(!efectoparceado.Params.ContainsKey(tokenlist[j].name)) return -1;
+
+              
+              if(efectoparceado.Params[tokenlist[j].name] is bool )
+              {
+               bool b =  (bool)efectoparceado.Params[tokenlist[j].name];
+               if (!bool.TryParse(tokenlist[j+2].name, out b)) return -1;
+               efectoparceado.Params[tokenlist[j].name] = b;
+              }
+
+              if(efectoparceado.Params[tokenlist[j].name] is int )
+              {
+               int b =  (int)efectoparceado.Params[tokenlist[j].name];
+               if (!int.TryParse(tokenlist[j+2].name, out b)) return -1;
+               efectoparceado.Params[tokenlist[j].name] = b;
+              }
+
+              
+
+            }
+
+
+           if(efectoparceado == null) return -1;
+ 
+
+           nuevacarta.efectosdelacarta.Add(efectoparceado);
+           
+
+
+           name = "";
+
+        }
+        }
+
+
+        
+
+
+
+
 
           cardlist.Add(nuevacarta);
 
@@ -366,7 +541,7 @@ public class hacercartas
 
 
 
-
+          
 
         return endcard;
       }

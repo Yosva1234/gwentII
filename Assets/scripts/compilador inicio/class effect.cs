@@ -8,8 +8,12 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using System.IO;
+using System.Linq;
 
 namespace gwentii{
+
+  
 public class Effect 
 {
       public string name  {get ;}
@@ -18,6 +22,24 @@ public class Effect
     {
         this.name = name;
     }
+
+    public Effect (Effect efectoprincipal)
+    {
+
+        this.name = efectoprincipal.name;
+
+        foreach( var parametro in efectoprincipal.Params)
+        {
+          addparams(parametro.Key,parametro.Value);
+        }
+
+    }
+
+    public List <Token> tokenactions = new List<Token>();
+
+
+
+
 //
 
    public Dictionary <string,object> Params = new Dictionary<string, object>();
@@ -53,7 +75,7 @@ public class Effect
   public class hacerefect
   {
 
-      public bool asignacion ( List <Token> tokenlist, List <Effect> effectlist, TMP_Text errors )
+      public bool asignacion ( List <Token> tokenlist, List <Effect> effectlist, string errors )
       {
         
         int ccorchetes = 0, cparentesis = 0, cllaves  = 0;
@@ -71,7 +93,7 @@ public class Effect
           {
             if(ccorchetes != 0 || cparentesis!=0 || cllaves!=0) 
             {
-              errors.text = tokenlist[x].error();
+              errors = tokenlist[x].error();
               return true;
             }
 
@@ -79,7 +101,7 @@ public class Effect
 
             if(endeffect == -1) 
             {
-              errors.text = tokenlist[x].error();
+              errors = tokenlist[x].error();
               return true;
             }
 
@@ -162,7 +184,7 @@ public class Effect
 
  ccorchetes = 0; cparentesis = 0; cllaves  = 0; posname = 0; endname = 0; 
 
-for (int x = pos; x<endeffect; x++)
+      for (int x = pos; x<endeffect; x++)
           {
 
           if(tokenlist[x].name == "[") ccorchetes++;
@@ -252,6 +274,57 @@ for (int x = pos; x<endeffect; x++)
                 break;
           }
           }
+                      //Debug.Log("yesssssss");
+
+
+          // -------------------------------------------------================================================================ ACTIOns
+
+          ccorchetes = 0; cparentesis = 0; cllaves  = 0; posname = 0; endname = 0; 
+
+          for (int x = pos; x<endeffect; x++)
+          {
+
+          if(tokenlist[x].name == "[") ccorchetes++;
+          if(tokenlist[x].name == "]") ccorchetes--;
+          if(tokenlist[x].name == "{") cllaves++;
+          if(tokenlist[x].name == "}") cllaves--;
+          if(tokenlist[x].name == "(") cparentesis++;
+          if(tokenlist[x].name == ")") cparentesis--;
+
+            if(tokenlist[x].name == "Action")
+          {
+            
+            if(ccorchetes != 0 || cparentesis!=0 || cllaves!=1 || tokenlist[x+1].name!=":") return -1;
+
+                    cllaves = 0;
+
+                    bool b = false;
+
+                    List<Token> tokenactioneffect = new List<Token>();
+
+                    for (int m = x+7; m<endeffect; m++)
+                    {
+                      if(cllaves == 0 && b) break;
+                      if(tokenlist[m].name == "{")
+                      {
+                        cllaves++;
+                        b = true;
+                      }
+                      if(tokenlist[m].name == "}")
+                      {
+                        cllaves--;
+                        b = true;
+                      }
+
+                      tokenactioneffect.Add(tokenlist[m]);
+                    }
+
+                    Debug.Log(tokenactioneffect.Count);
+                    nuevoefecto.tokenactions = tokenactioneffect;
+          
+          }}
+
+
 
 
         effectlist.Add(nuevoefecto);

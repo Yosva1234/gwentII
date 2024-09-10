@@ -14,7 +14,7 @@ public class comprobaciones
 {
 //
     //--------------------/-------------------------------------------- COMPROBANDO LOS DELIMITADORES
-    public bool comprobardelimitadores( List <Token> tokenlist, TMP_Text errors)
+    public bool comprobardelimitadores( List <Token> tokenlist, string errors)
     {
 
             string error = "";
@@ -38,7 +38,7 @@ public class comprobaciones
 
         if(!comprobarmayorquecero(cc,cy,cp) && !comprobacionmenorquecero(cc,cy,cp) ) error = tokenlist.Last().error();
 
-        errors.text = error;
+        errors = error;
 
         return true;
 
