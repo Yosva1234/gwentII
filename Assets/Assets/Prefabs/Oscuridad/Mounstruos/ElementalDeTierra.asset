@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108e8794aca6d084db806d371863e4c3, type: 3}
   m_Name: ElementalDeTierra
   m_EditorClassIdentifier: 
-  Name: ElementalDeTierra
+  Name: hielo
   Power: 3
-  CardPhoto: {fileID: 21300000, guid: 4133c48303de5674c9e4f07172601713, type: 3}
+  IsCreated: 0
+  CardPhoto: {fileID: 21300000, guid: 6176288ba05a7e14c85a8fb8234acaa9, type: 3}
   Owner: 0
-  Type: 0
-  Faction: 1
-  Range: 000000000100000002000000
-  OnActivation: 
+  Type: 1
+  Faction: 0
+  ranges: 02000000
+  EffectType: 1
+  EffectLeader: 0

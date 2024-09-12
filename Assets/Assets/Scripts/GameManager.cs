@@ -5,22 +5,89 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 namespace gwentii{
+
+
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instancia {get; private set;}
-    public GameObject Prefab;
-     public  GameObject Hand1;
+    public static GameManager Instancia {get; set;}
+     public GameObject RowM1 {get; set;}
+      public GameObject rowM1
+        {
+        get{ return RowM1; }
+        set {RowM1 = value; }
+        }
+     public GameObject RowR1{get; set;}
+     public GameObject rowR1
+        {
+        get{ return RowR1; }
+        set {RowR1 = value; }
+        }
+     public GameObject RowS1{get; set;}
+
+     public GameObject rowS1
+        {
+        get{ return RowS1; }
+        set {RowS1 = value; }
+        }
+     
+     public GameObject RowM2{get; set;}
+     public GameObject rowM2
+        {
+        get{ return RowM2; }
+        set {RowM2 = value; }
+        }
+     
+     public GameObject RowR2{get; set;} 
+     public GameObject rowR2
+        {
+        get{ return RowR2; }
+        set {RowR2 = value; }
+        }
+     public GameObject RowS2{get; set;}
+
+     public GameObject rowS2
+        {
+        get{ return RowS2; }
+        set {RowS2 = value; }
+        }
+     public GameObject Prefab;
+    public  GameObject Hand1;
+    public GameObject hand1
+        {
+        get{ return Hand1; }
+        set {Hand1 = value; }
+        }
+
+    
+    
     public  GameObject Hand2;
+    public GameObject hand2
+        {
+        get{ return Hand2; }
+        set {Hand2 = value; }
+        }
+
+    
     public  GameObject Deck1;
+    public GameObject deck1
+        {
+        get{ return Deck1; }
+        set {Deck1 = value; }
+        }
     public  GameObject Deck2;
+
+     public GameObject deck2
+        {
+        get{ return Deck2; }
+        set {Deck2 = value; }
+        }
     public GameObject Cementery1;
     public GameObject Cementery2;
     public GameObject Deck1Back;
-    public GameObject Deck2Back;
+    [SerializeField] public GameObject Deck2Back;
     public GameObject lidersqr1;
     public GameObject lidersqr2;
-    public  List<Card> CardsPlayer1 = new List<Card>();
-    public  List<Card> CardsPlayer2 = new List<Card>();
+    public  List<Card> CardsPlayer1 ;   public  List<Card> CardsPlayer2;
     public Card LiderIlai;
     public Card LiderTork;
     public bool CurrentPlayer = false;
@@ -37,14 +104,31 @@ public class GameManager : MonoBehaviour
     }
 
 
+
+
     void Start()
     {
+
+            
+                RowM1 = new GameObject();
+                RowM2 = new GameObject();
+                RowR1 = new GameObject();
+                RowR2 = new GameObject();
+                RowS1 = new GameObject();
+                RowS2 = new GameObject();
+
+               
+
+
 
                 if(compila.cardlist.Count!=0)
             {
 
+                Debug.Log(compila.cardlist.Count);
+
                 for (int x = 0; x<compila.cardlist.Count; x++)
                 {
+                    compila.cardlist[x].IsCreated = true;
                     CardsPlayer1.Insert(0,compila.cardlist[x]);
 
                 }
@@ -189,6 +273,20 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Actualizacion.Actualizar();
+
+         
+                Instancia.RowM1 = RowM1;
+                Instancia.RowM2 = RowM2;
+                Instancia.RowR1 = RowM1;
+                Instancia.RowR2 = RowR2;
+                Instancia.RowS2 = RowS2;
+                Instancia.RowS1 = RowS1;
+                Instancia.Deck1 = Deck1;
+                Instancia.Deck2 = Deck2;
+                Instancia.Hand1 = Hand1;
+                Instancia.Hand2 = Hand2;
+        
+                //Debug.Log(Instancia.Hand1.transform.childCount);
     }
     
 }

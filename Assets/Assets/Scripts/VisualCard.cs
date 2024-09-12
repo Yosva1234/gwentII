@@ -14,6 +14,11 @@ public class VisualCard : MonoBehaviour
     {
         if(card is not null ) InicializaCarta();
     }
+
+    public void Update()
+    {
+      if(Power!=null && card !=null)  Power.text = card.Power.ToString();
+    }
     public void InicializaCarta()
     {
         Name.text = card.Name;

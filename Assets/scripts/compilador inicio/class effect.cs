@@ -319,7 +319,7 @@ public class Effect
                       tokenactioneffect.Add(tokenlist[m]);
                     }
 
-                    Debug.Log(tokenactioneffect.Count);
+//                    Debug.Log(tokenactioneffect.Count);
                     nuevoefecto.tokenactions = tokenactioneffect;
           
           }}

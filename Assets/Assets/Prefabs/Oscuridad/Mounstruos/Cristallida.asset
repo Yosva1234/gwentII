@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108e8794aca6d084db806d371863e4c3, type: 3}
   m_Name: Cristallida
   m_EditorClassIdentifier: 
-  Name: Cristallida
-  Power: 2
-  CardPhoto: {fileID: 21300000, guid: 5f9032efae49ea74083fe5965ba484ae, type: 3}
+  Name: clon
+  Power: 0
+  IsCreated: 0
+  CardPhoto: {fileID: 21300000, guid: c7f594ec520a4a5499f37cf780aa872d, type: 3}
   Owner: 0
-  Type: 1
-  Faction: 1
-  Range: 0000000002000000
-  EffectType: 1
-  OnActivation: 
+  Type: 2
+  Faction: 0
+  ranges: 00000000
+  EffectType: 4
+  EffectLeader: 0

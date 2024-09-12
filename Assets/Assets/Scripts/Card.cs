@@ -14,7 +14,7 @@ public enum CardEffects{oro,plata,senuelo,despeje,clima,aumento,No_Effect}
 public enum LiderEffects{Destruccion,Recuperacion}
 
 [CreateAssetMenu(fileName = "New Card" , menuName = "Card")]
-public class Card : ScriptableObject
+public class Card : MonoBehaviour
 {
     public string Name;
     public int Power;
@@ -58,12 +58,60 @@ public class Card : ScriptableObject
     {
 
     }
+
+
+     public List<Card> ObtenerListaDeHijosDeTipoCard(GameObject objetoPadre)
+    {
+        List<Card> listaDeHijosDeTipoCard = new List<Card>();
+       
+       VisualCard [] hijos = objetoPadre.transform.GetComponentsInChildren<VisualCard>();
+
+            for(int x = 0; x<hijos.Length; x++)
+            {
+                listaDeHijosDeTipoCard.Add(hijos[x].card);
+            }
+
+            correspondencia.Add(listaDeHijosDeTipoCard,objetoPadre);
+
+       return listaDeHijosDeTipoCard;
+    }
+
+    public List <Card> makeboard(List <Card> list1, List<Card> list2, List<Card>lista3)
+    {
+        List <Card> Board = new List<Card>();
+
+        foreach(Card carta in list1)
+        Board.Add(carta);
+
+        foreach(Card carta in list2)
+        Board.Add(carta);
+
+        foreach(Card carta in lista3)
+        Board.Add(carta);
+
+        return Board;
+
+    }
+
+    public static Dictionary<List<Card>,GameObject> correspondencia; 
+
         public void ActivateEffect(GameObject DroppedCard)
     {
 
         if (DroppedCard.transform.GetComponent<VisualCard>().card.IsCreated)
         {
+            correspondencia = new Dictionary<List<Card>, GameObject>();
+
+           contextclass contexto = new contextclass(ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.hand1),ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.hand2), ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.deck1), ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.deck2), makeboard(ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.rowM1),ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.rowR1),ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.rowS1)), makeboard(ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.rowM2),ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.rowR2),ObtenerListaDeHijosDeTipoCard(GameManager.Instancia.rowS2)));
             
+            foreach(Effect efectoactual in efectosdelacarta)
+            {
+                actions.start(efectoactual.name,contexto.Handplayer1,contexto,efectoactual.Params);
+                Debug.Log("efecto activado");
+            }
+
+            return ;
+
         }
 
 

@@ -508,46 +508,22 @@ public class hacercartas
                int b =  (int)efectoparceado.Params[tokenlist[j].name];
                if (!int.TryParse(tokenlist[j+2].name, out b)) return -1;
                efectoparceado.Params[tokenlist[j].name] = b;
-              }
-
-              
+              }          
 
             }
-
 
            if(efectoparceado == null) return -1;
  
 
            nuevacarta.efectosdelacarta.Add(efectoparceado);
-           
-
-
+          
            name = "";
 
         }
         }
 
-
-        
-
-
-
-
-
           cardlist.Add(nuevacarta);
-
-
-
-
-
-
-          
-
         return endcard;
       }
-
-
-
-
 }
 }

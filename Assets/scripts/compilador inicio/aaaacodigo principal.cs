@@ -1,13 +1,12 @@
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using gwentii;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using System;
-using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
-using UnityEditor.AnimatedValues;
+
 
 namespace gwentii{
 public class compila : MonoBehaviour
@@ -15,14 +14,12 @@ public class compila : MonoBehaviour
 
    
 //
-    public string texto, errors; 
+    public string texto="", errors=""; 
      metodosauxiliares metodos = new metodosauxiliares();
      comprobaciones comprobarerrores = new comprobaciones();
      hacerefect parcerdeefectro = new hacerefect();
      hacercartas parcearcartas = new hacercartas();
-     
 
-    
       public static  List<Effect> effectlist = new List<Effect>();
       public static  List<Card> cardlist = new List<Card>();
 
@@ -46,7 +43,7 @@ public class compila : MonoBehaviour
 
      if(parcearcartas.asignacion(tokenlist,cardlist,errors)) return;
 
-    /* foreach( Card carta in cardlist)
+    /*foreach( Card carta in cardlist)
      {
          Debug.Log(carta.Name);
 
@@ -62,13 +59,11 @@ public class compila : MonoBehaviour
         }
      }
      */
+     
 
-     foreach(Effect effect in effectlist)
-     {
-        Debug.Log(effect.tokenactions.Count);
-     }
+     
 
-       codigogenerator.sobrescribiracrcivo(effectlist);
+       //codigogenerator.sobrescribiracrcivo(effectlist);
 
 
 /*
@@ -143,7 +138,20 @@ card
   Range: ["Melee ",  "Ranged" , "Sieged"],
 }
 
-      effect
+      
+        effect
+        {
+            Name: "Draw"
+            Action: (targets, context) =>
+            {
+                topCard = context.Deck.Pop();
+                context.Hand.Add(topCard);
+                context.Hand.Shuffle();
+            }
+        }
+
+       
+        effect
         {
             Name: "Damage",
             Params:
@@ -165,34 +173,145 @@ card
             }
         }
 
-        effect
-        {
-            Name: "Draw"
-            Action: (targets, context) =>
-            {
-                topCard = context.Deck.Pop();
-                context.Hand.Add(topCard);
-                context.Hand.Shuffle();
-            }
-        }
-
-        effect
-        {
-            Name: "ReturnToDeck"
-            Action: (targets, context) =>
-            {
-                for target in targets
-                {
-                    owner = target.Owner;
-                    deck = context.DeckOfPlayer(owner);
-                    deck.Push(target);
-                    deck.Shuffle();
-                    context.Board.Remove(target);
-                };
-            }
-        }
 
         card {
+            Type: "Oro",
+            Name: "Beluga",
+            Faction: "Northern Realms",
+            Power: 10,
+            Range: ["Melee", "Ranged"],
+            OnActivation: [
+                {
+                    Effect: {
+                        Name: "Draw",
+                    },
+
+
+                    Selector: {
+                        Source: "board",
+                        Single: false,
+                        Predicate: (unit) => unit.Faction == "Northern Realms"
+                    },
+                    PostAction: {
+                        Effect: {
+                            Name: "ReturnToDeck",
+                        },
+                        Selector: {
+                            Source: "parent",
+                            Single: false,
+                            Predicate: (unit) => unit.Power < 1
+                        },
+                        PostAction: {
+                            Effect: {
+                                Name: "Draw",
+                            },
+                        },
+                    },
+                },
+            ]
+        }
+         card {
+            Type: "Oro",
+            Name: "Draw",
+            Faction: "Northern Realms",
+            Power: 10,
+            Range: ["Melee", "Ranged"],
+            OnActivation: [
+                {
+                    Effect: {
+                        Name: "Damage",
+                    },
+
+
+                    Selector: {
+                        Source: "board",
+                        Single: false,
+                        Predicate: (unit) => unit.Faction == "Northern Realms"
+                    },
+                    PostAction: {
+                        Effect: {
+                            Name: "ReturnToDeck",
+                        },
+                        Selector: {
+                            Source: "parent",
+                            Single: false,
+                            Predicate: (unit) => unit.Power < 1
+                        },
+                        PostAction: {
+                            Effect: {
+                                Name: "Draw",
+                            },
+                        },
+                    },
+                },
+            ]
+        }
+
+ card {
+            Type: "Oro",
+            Name: "perra33",
+            Faction: "Northern Realms",
+            Power: 10,
+            Range: ["Melee", "Ranged"],
+            OnActivation: [
+                {
+                    Effect: {
+                        Name: "Draw",
+                    },
+
+
+                    Selector: {
+                        Source: "board",
+                        Single: false,
+                        Predicate: (unit) => unit.Faction == "Northern Realms"
+                    },
+                    PostAction: {
+                        Effect: {
+                            Name: "ReturnToDeck",
+                        },
+                        Selector: {
+                            Source: "parent",
+                            Single: false,
+                            Predicate: (unit) => unit.Power < 1
+                        },
+                        PostAction: {
+                            Effect: {
+                                Name: "Draw",
+                            },
+                        },
+                    },
+                },
+            ]
+        }
+
+
+
+card
+    {
+        Type: "Oro",
+        Name: "El lindo",
+        Faction: "Elementales",
+        Power: 10,
+        Range: ["Melee", "Ranged"],
+        OnActivation:
+        [
+            {
+                Effect:
+                {
+                    Name: "Damage",
+                    Amount: 2,
+                },
+                Selector:
+                {
+                    Source: "board",
+                    Single: false,
+                    Predicate: (unit) => unit.Faction == "Celestial"
+                },
+            },
+        ]
+    }  
+
+     card {
             Type: "Oro",
             Name: "Beluga",
             Faction: "Northern Realms",
@@ -255,6 +374,7 @@ card
             },
         ]
     }  
+
     card
     {
         Type: "Oro",
@@ -336,6 +456,23 @@ card
             },
         ]
     }  
+
+     effect
+        {
+            Name: "ReturnToDeck"
+            Action: (targets, context) =>
+            {
+                for target in targets
+                {
+                    owner = target.Owner;
+                    deck = context.DeckOfPlayer(owner);
+                    deck.Push(target);
+                    deck.Shuffle();
+                    context.Hand.Remove(target);
+                };
+            }
+        }
+
     card
     {
         Type: "Oro",

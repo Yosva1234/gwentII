@@ -21,6 +21,9 @@ public class Actualizacion : MonoBehaviour
         Transform cementery1 = GameManager.Instancia.Cementery1.transform;
         Transform cementery2 = GameManager.Instancia.Cementery2.transform;
 
+        Transform hand1 = GameManager.Instancia.Hand1.transform;
+        Transform hand2 = GameManager.Instancia.Hand2.transform;
+
         MoverHijos(asedioP1, cementery1, nuevaescala);
         MoverHijos(distanciaP1, cementery1, nuevaescala);
         MoverHijos(cuerpoP1, cementery1, nuevaescala);
@@ -28,6 +31,9 @@ public class Actualizacion : MonoBehaviour
         MoverHijos(cuerpoP2, cementery2, nuevaescala);
         MoverHijos(distanciaP2, cementery2, nuevaescala);
         MoverHijos(asedioP2, cementery2, nuevaescala);
+
+        MoverHijos(hand1,cementery1,nuevaescala);
+        MoverHijos(hand2,cementery2,nuevaescala);
     }
     private static void MoverHijos(Transform padre, Transform nuevaPosicion, Vector2 nuevaEscala)
     {

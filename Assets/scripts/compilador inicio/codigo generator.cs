@@ -14,7 +14,7 @@ public class codigogenerator
             {
                     writer.Write("using System.Collections; \n using System.IO; \n using Unity.VisualScripting; \n using System.Collections.Generic; \n using System.Linq; \n using UnityEngine; \n namespace gwentii{ \n public class actions { \n public static void start(string name , List<Card> tarjets, contextclass context, Dictionary<string,object> Param) { \n ");
                     writer.WriteLine(" using (StreamWriter writer = new StreamWriter("+'"'+"Assets/scripts/compilador inicio/empezaractions.cs"+'"'+")){" );
-                    writer.WriteLine ("writer.Write("+'"'+"using System.Collections;  using System.Collections.Generic;  using UnityEngine;  namespace gwentii{ public class empezaractions {   public static void codigoescrito(List <Card> targets, contextclass context , Dictionary<string,object> Param){ " + "name" + "(tarjets,context,Param)}}}" + '"' + ");");
+                    writer.WriteLine ("writer.Write("+'"'+"using System.Collections;  using System.Collections.Generic;  using UnityEngine;  namespace gwentii{ public class empezaractions {   public static void codigoescrito(List <Card> targets, contextclass context , Dictionary<string,object> Param){ actions." + '"' + " + name +" + '"' +"(targets,context,Param);}}}" + '"' + ");");
                     writer.WriteLine("}");
                     writer.WriteLine("empezaractions.codigoescrito(tarjets,context,Param);\n");
                     writer.WriteLine("}");
@@ -49,9 +49,12 @@ public class codigogenerator
                                 {
                                     writer.Write(" var ");
                                 }
-                                writer.Write(effect.tokenactions[x].name);            
-                                if(effect.tokenactions[x].name == "Board"||effect.tokenactions[x].name == "Hand" ||  effect.tokenactions[x].name == "Deck" || effect.tokenactions[x].name == "Field") writer.Write("()");             
-
+                                writer.Write(effect.tokenactions[x].name);        
+                                if(effect.tokenactions[x].name == "Pop") writer.Write("item");    
+                                if(effect.tokenactions[x].name == "Board"||effect.tokenactions[x].name == "Hand" ||  effect.tokenactions[x].name == "Deck" || effect.tokenactions[x].name == "Field") writer.Write("()"); 
+                                if(effect.tokenactions[x].name == "Remove") writer.Write("item");     
+                                if(effect.tokenactions[x].name == "Add") writer.Write("item");         
+                                 
                         }
                   }
                     writer.WriteLine("}}");
