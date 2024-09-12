@@ -16,9 +16,9 @@ empezaractions.codigoescrito(tarjets,context,Param);
  public static void Draw ( List <Card> targets, contextclass context , Dictionary<string,object> Param )  
 {
 
- var topCard=context.Deckplayer1.Pop();
-context.Handplayer1.Additem(topCard);
-context.Handplayer1.Shuffle();
+ var topCard=context.Deck().pop();
+context.Hand().add(topCard);
+context.Hand().Shuffle();
 }
 
  public static void Damage ( List <Card> targets, contextclass context , Dictionary<string,object> Param )  
@@ -36,6 +36,22 @@ target.Power-=1;
 i+=1;
 }
 
+}
+
+;
+}
+
+ public static void ReturnToDeck ( List <Card> targets, contextclass context , Dictionary<string,object> Param )  
+{
+
+foreach( Card target in targets )
+{
+
+ var owner=target.Owner;
+ var deck=context.DeckOfPlayer(owner);
+deck.Push(target);
+deck.Shuffle();
+context.Board().remove(target);
 }
 
 ;

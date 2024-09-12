@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -49,13 +50,46 @@ public class codigogenerator
                                 {
                                     writer.Write(" var ");
                                 }
+
+                                if (isadd(effect.tokenactions[x].name,"Add")) 
+                                {
+                                    writer.Write("a"+effect.tokenactions[x].name.Substring(1));
+                                    continue;
+                                }
+                                if (isadd(effect.tokenactions[x].name,"Rem")) 
+                                {
+                                    writer.Write("r"+effect.tokenactions[x].name.Substring(1));
+                                    continue;
+                                }
+                                if (isadd(effect.tokenactions[x].name,"Pop")) 
+                                {
+                                    writer.Write("p"+effect.tokenactions[x].name.Substring(1));
+                                    continue;
+                                }
                                 writer.Write(effect.tokenactions[x].name);        
                                 if(effect.tokenactions[x].name == "Pop") writer.Write("item");    
                                 if(effect.tokenactions[x].name == "Board"||effect.tokenactions[x].name == "Hand" ||  effect.tokenactions[x].name == "Deck" || effect.tokenactions[x].name == "Field") writer.Write("()"); 
                                 if(effect.tokenactions[x].name == "Remove") writer.Write("item");     
-                                if(effect.tokenactions[x].name == "Add") writer.Write("item");         
+                                        
                                  
                         }
                   }
                     writer.WriteLine("}}");
-}}}}
+
+}}
+
+ public static bool isadd(string s, string s2)
+   {
+            string s1="";
+
+            for(int x = 0; x<Math.Min(3,s.Length);x++)
+            {
+                s1+=s[x];
+            }
+
+            return(s1==s2);
+   }
+
+}
+
+}

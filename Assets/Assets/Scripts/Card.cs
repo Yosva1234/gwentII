@@ -27,6 +27,7 @@ public class Card : MonoBehaviour
     public CardEffects EffectType;
     public LiderEffects EffectLeader;
     public List <Effect> efectosdelacarta = new List<Effect>();
+    public Selector selectorcard;
 
     public Card (string name, int power, CardType tipo, string faction, List <rangetype> rangos )
     {
@@ -35,6 +36,8 @@ public class Card : MonoBehaviour
             this.Power = power;
 
             this.Type = tipo;
+
+            //this.selectorcard = selectorcard;
 
             ranges = new Range[rangos.Count];
             for (int x = 0; x<rangos.Count; x++)
@@ -89,7 +92,11 @@ public class Card : MonoBehaviour
         foreach(Card carta in lista3)
         Board.Add(carta);
 
-        return Board;
+//        Debug.Log(Board.Count);
+
+       Debug.Log(list1.Count+list2.Count+lista3.Count);
+
+       return Board;
 
     }
 
@@ -106,7 +113,7 @@ public class Card : MonoBehaviour
             
             foreach(Effect efectoactual in efectosdelacarta)
             {
-                actions.start(efectoactual.name,contexto.Handplayer1,contexto,efectoactual.Params);
+                actions.start(efectoactual.name,selectorcard.filtrar(contexto),contexto,efectoactual.Params);
                 Debug.Log("efecto activado");
             }
 

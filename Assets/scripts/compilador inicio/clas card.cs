@@ -522,6 +522,65 @@ public class hacercartas
         }
         }
 
+
+         Selector selector;
+
+         Source source = Source.vacio;
+
+         bool single = false;
+
+         List <Token> Predicate = new List<Token>();
+
+         for(int x = pos; x < endcard; x++ )
+         {
+          if(tokenlist[x].name == "Selector")
+          {
+            for(int j = x+3; j<endcard; j++)
+            {
+              if(tokenlist[j].name == "Source")
+              {
+                if(tokenlist[j+3].name=="board") source = Source.board;
+                 if(tokenlist[j+3].name=="field") source = Source.field;
+                  if(tokenlist[j+3].name=="otherfield") source = Source.otherfield;
+                   if(tokenlist[j+3].name=="deck") source = Source.deck;
+                    if(tokenlist[j+3].name=="otherdeck") source = Source.otherdeck;
+                     if(tokenlist[j+3].name=="hand") source = Source.hand;
+                      if(tokenlist[j+3].name=="otherhand") source = Source.otherhand;
+
+                      if(source == Source.vacio) return -1; 
+              }
+              if(tokenlist[j].name == "Single")
+              {
+                if(!bool.TryParse(tokenlist[j+2].name, out single)) return -1;
+              }
+
+              if(tokenlist[j].name == "Predicate")
+              {
+                for(int m = j+2; m<endcard; m++)
+                {
+                  if(tokenlist[m].name == "}") break;
+                  Predicate.Add(tokenlist[m]);
+                }
+              }
+
+              if(Predicate.Count !=0) break;
+
+            }
+          }
+         }
+
+         Debug.Log(source.ToString());
+         Debug.Log(single);
+         
+         for(int a = 0; a<Predicate.Count; a++)
+         {
+          Debug.Log(Predicate[a].name);
+         }
+
+         selector = new Selector(single,source,Predicate);
+         nuevacarta.selectorcard = selector;
+
+
           cardlist.Add(nuevacarta);
         return endcard;
       }

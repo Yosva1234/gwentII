@@ -11,9 +11,6 @@ using UnityEngine;
 namespace gwentii{
 public class compila : MonoBehaviour
 {
-
-   
-//
     public string texto="", errors=""; 
      metodosauxiliares metodos = new metodosauxiliares();
      comprobaciones comprobarerrores = new comprobaciones();
@@ -25,9 +22,6 @@ public class compila : MonoBehaviour
 
 
      
-
-    
-
     public void RUN()
     {
         errors="";
@@ -41,72 +35,11 @@ public class compila : MonoBehaviour
      if(parcerdeefectro.asignacion(tokenlist,effectlist,errors)) return;
 
 
-     if(parcearcartas.asignacion(tokenlist,cardlist,errors)) return;
+     if(parcearcartas.asignacion(tokenlist,cardlist,errors)) return;   
 
-    /*foreach( Card carta in cardlist)
-     {
-         Debug.Log(carta.Name);
-
-        foreach( Effect ecefto in carta.efectosdelacarta)
-        {
-            Debug.Log(ecefto.name);
-            foreach(var param in ecefto.Params)
-            {
-                Debug.Log(param.Key);
-                Debug.Log(param.Value.ToString());
-            }
-           
-        }
-     }
-     */
-     
-
-     
-
-       //codigogenerator.sobrescribiracrcivo(effectlist);
-
-
-/*
-            Debug.Log("yes");
-
-        // cambiar camara para la posicion del campo de juego      
-      
-        for (int x = 0; x<effectlist.Count; x++)
-        {
-          Debug.Log(effectlist[x].name);
-          
-          foreach (var param in effectlist[x].Params)
-          {
-            Debug.Log(param.Key);
-            Debug.Log(param.Value.ToString());
-          }
-
-        }
-
-       // Debug.Log(cardlist.Count);
-
-        for (int x = 0; x<cardlist.Count; x++)
-        {
-
-          Debug.Log(cardlist[x].Name);
-          Debug.Log(cardlist[x].Power);
-          Debug.Log(cardlist[x].Type.ToString());
-          Debug.Log(cardlist[x].Faction);
-
-        }
-        
-*/
-
-
-
-
-
-
+      codigogenerator.sobrescribiracrcivo(effectlist);
    
-    }
-
-
-    
+    }   
 
 }
 }
@@ -118,27 +51,7 @@ public class compila : MonoBehaviour
 
 
 
-/*
-effect
-{
-Name:"hola",
-
-Params : 
-{
-Amount : Number
-}
-}
-
-card 
-{
-  Name:"carta1",
-  Power: 10,
-  Type: "Oro",
-  Faction: " la morronga 33 ",
-  Range: ["Melee ",  "Ranged" , "Sieged"],
-}
-
-      
+/*   
         effect
         {
             Name: "Draw"
@@ -173,46 +86,26 @@ card
             }
         }
 
+           effect
+        {
+            Name: "ReturnToDeck"
+            Action: (targets, context) =>
+            {
+                for target in targets
+                {
+                    owner = target.Owner;
+                    deck = context.DeckOfPlayer(owner);
+                    deck.Push(target);
+                    deck.Shuffle();
+                    context.Board.Remove(target);
+                };
+            }
+        }
+
 
         card {
             Type: "Oro",
-            Name: "Beluga",
-            Faction: "Northern Realms",
-            Power: 10,
-            Range: ["Melee", "Ranged"],
-            OnActivation: [
-                {
-                    Effect: {
-                        Name: "Draw",
-                    },
-
-
-                    Selector: {
-                        Source: "board",
-                        Single: false,
-                        Predicate: (unit) => unit.Faction == "Northern Realms"
-                    },
-                    PostAction: {
-                        Effect: {
-                            Name: "ReturnToDeck",
-                        },
-                        Selector: {
-                            Source: "parent",
-                            Single: false,
-                            Predicate: (unit) => unit.Power < 1
-                        },
-                        PostAction: {
-                            Effect: {
-                                Name: "Draw",
-                            },
-                        },
-                    },
-                },
-            ]
-        }
-         card {
-            Type: "Oro",
-            Name: "Draw",
+            Name: "el lindo 3323",
             Faction: "Northern Realms",
             Power: 10,
             Range: ["Melee", "Ranged"],
@@ -220,6 +113,31 @@ card
                 {
                     Effect: {
                         Name: "Damage",
+                        Amount:2,
+                    },
+
+
+                    Selector: {
+                        Source: "otherfield",
+                        Single: false,
+                        Predicate: (unit) => unit.Faction == "Northern Realms"
+                    
+                    
+                    },
+                },
+            ]
+        }
+         card {
+            Type: "Oro",
+            Name: "mi belleza 56",
+            Faction: "Northern Realms",
+            Power: 10,
+            Range: ["Melee", "Ranged"],
+            OnActivation: [
+                {
+                    Effect: {
+                        Name: "Damage",
+                        Amount: 1,
                     },
 
 
@@ -228,28 +146,13 @@ card
                         Single: false,
                         Predicate: (unit) => unit.Faction == "Northern Realms"
                     },
-                    PostAction: {
-                        Effect: {
-                            Name: "ReturnToDeck",
-                        },
-                        Selector: {
-                            Source: "parent",
-                            Single: false,
-                            Predicate: (unit) => unit.Power < 1
-                        },
-                        PostAction: {
-                            Effect: {
-                                Name: "Draw",
-                            },
-                        },
-                    },
                 },
             ]
         }
 
  card {
             Type: "Oro",
-            Name: "perra33",
+            Name: "perrisima",
             Faction: "Northern Realms",
             Power: 10,
             Range: ["Melee", "Ranged"],
@@ -265,21 +168,8 @@ card
                         Single: false,
                         Predicate: (unit) => unit.Faction == "Northern Realms"
                     },
-                    PostAction: {
-                        Effect: {
-                            Name: "ReturnToDeck",
-                        },
-                        Selector: {
-                            Source: "parent",
-                            Single: false,
-                            Predicate: (unit) => unit.Power < 1
-                        },
-                        PostAction: {
-                            Effect: {
-                                Name: "Draw",
-                            },
-                        },
-                    },
+                
+                    
                 },
             ]
         }
@@ -330,50 +220,11 @@ card
                         Single: false,
                         Predicate: (unit) => unit.Faction == "Northern Realms"
                     },
-                    PostAction: {
-                        Effect: {
-                            Name: "ReturnToDeck",
-                        },
-                        Selector: {
-                            Source: "parent",
-                            Single: false,
-                            Predicate: (unit) => unit.Power < 1
-                        },
-                        PostAction: {
-                            Effect: {
-                                Name: "Draw",
-                            },
-                        },
-                    },
                 },
             ]
         }
 
 
-card
-    {
-        Type: "Oro",
-        Name: "El lindo",
-        Faction: "Elementales",
-        Power: 10,
-        Range: ["Melee", "Ranged"],
-        OnActivation:
-        [
-            {
-                Effect:
-                {
-                    Name: "Damage",
-                    Amount: 2,
-                },
-                Selector:
-                {
-                    Source: "board",
-                    Single: false,
-                    Predicate: (unit) => unit.Faction == "Celestial"
-                },
-            },
-        ]
-    }  
 
     card
     {
@@ -392,7 +243,7 @@ card
                 },
                 Selector:
                 {
-                    Source: "board",
+                    Source: "otherfield",
                     Single: false,
                     Predicate: (unit) => unit.Faction == "Dark"
                 },
@@ -457,21 +308,7 @@ card
         ]
     }  
 
-     effect
-        {
-            Name: "ReturnToDeck"
-            Action: (targets, context) =>
-            {
-                for target in targets
-                {
-                    owner = target.Owner;
-                    deck = context.DeckOfPlayer(owner);
-                    deck.Push(target);
-                    deck.Shuffle();
-                    context.Hand.Remove(target);
-                };
-            }
-        }
+  
 
     card
     {

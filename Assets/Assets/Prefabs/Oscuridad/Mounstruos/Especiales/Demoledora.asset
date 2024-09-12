@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108e8794aca6d084db806d371863e4c3, type: 3}
   m_Name: Demoledora
   m_EditorClassIdentifier: 
-  Name: Demoledora
+  Name: casa de barbaros
   Power: 0
-  CardPhoto: {fileID: 21300000, guid: b1d28af74ec98254492488f74791ff55, type: 3}
+  IsCreated: 0
+  CardPhoto: {fileID: 21300000, guid: 451acf838f7ab0c46908410c9ffda0cf, type: 3}
   Owner: 0
   Type: 4
   Faction: 1
-  Range: 
+  ranges: 00000000
   EffectType: 3
-  OnActivation: 
+  EffectLeader: 0

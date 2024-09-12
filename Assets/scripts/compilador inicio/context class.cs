@@ -21,7 +21,9 @@ public class contextclass : MonoBehaviour
         Deckplayer1 = Deck1;
         Deckplayer2 = Deck2;
         Fieldplayer1 = Field1;
-        Fieldplayer2 = field2;           
+        Fieldplayer2 = field2;         
+
+//        Debug.Log(Handplayer1.Count);  
 
     }
 
@@ -29,20 +31,20 @@ public class contextclass : MonoBehaviour
 
    public List <Card> HandOfPlayer( bool player )
    {
-    if(player) return Handplayer1;
+    if(!player) return Handplayer1;
     return Handplayer2;
    }
 
 
     public List <Card> FieldOfPlayer( bool player )
    {
-    if(player) return Fieldplayer1;
+    if(!player) return Fieldplayer1;
     return Fieldplayer2;
    }
 
     public List <Card> DeckOfPlayer( bool player )
    {
-    if(player) return Deckplayer1;
+    if(!player) return Deckplayer1;
     return Deckplayer2;
    }
 
@@ -83,10 +85,11 @@ public static class ListException
         list.Insert(0,carta);
     }
 
-    public static Card Pop(this List<Card> list)
+    public static Card pop(this List<Card> list)
     {
-        Card newcard = list[0];
-        list[0].Power = -1;
+       Card newcard = list[0];
+        //Debug.Log(newcard.name);
+        //list[0].Power = -1;
         return newcard;
     }
 
@@ -100,23 +103,28 @@ public static class ListException
             Debug.Log("sfufle");
     }
 
-    public static void Removeitem(this List<Card> list, Card card)
+    public static void remove(this List<Card> list, Card card)
     {
         card.Power = -1;
     }
 
-    public static void Additem(this List<Card> list, Card card)
+    public static void add(this List<Card> list, Card card)
     {
 
      VisualCard cartavisual = check(card);
+     cartavisual.GetComponent<DragDrop>().enabled = true;
 
-     Debug.Log(cartavisual.card.name);
+     Vector2 nueevaescala = new Vector2(1,1);
+
+//     Debug.Log(cartavisual.card.name);
 
      GameObject padre = Card.correspondencia[list];
 
      Debug.Log(padre.transform.childCount);
 
      cartavisual.transform.SetParent(padre.transform);
+     cartavisual.transform.localScale = nueevaescala;
+
 
     }
 

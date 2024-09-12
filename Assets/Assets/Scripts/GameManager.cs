@@ -10,19 +10,19 @@ namespace gwentii{
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instancia {get; set;}
-     public GameObject RowM1 {get; set;}
+     public GameObject RowM1 ;
       public GameObject rowM1
         {
         get{ return RowM1; }
         set {RowM1 = value; }
         }
-     public GameObject RowR1{get; set;}
+     public GameObject RowR1;
      public GameObject rowR1
         {
         get{ return RowR1; }
         set {RowR1 = value; }
         }
-     public GameObject RowS1{get; set;}
+     public GameObject RowS1;
 
      public GameObject rowS1
         {
@@ -30,20 +30,20 @@ public class GameManager : MonoBehaviour
         set {RowS1 = value; }
         }
      
-     public GameObject RowM2{get; set;}
+     public GameObject RowM2;
      public GameObject rowM2
         {
         get{ return RowM2; }
         set {RowM2 = value; }
         }
      
-     public GameObject RowR2{get; set;} 
+     public GameObject RowR2;
      public GameObject rowR2
         {
         get{ return RowR2; }
         set {RowR2 = value; }
         }
-     public GameObject RowS2{get; set;}
+     public GameObject RowS2;
 
      public GameObject rowS2
         {
@@ -109,22 +109,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-            
-                RowM1 = new GameObject();
-                RowM2 = new GameObject();
-                RowR1 = new GameObject();
-                RowR2 = new GameObject();
-                RowS1 = new GameObject();
-                RowS2 = new GameObject();
-
-               
-
 
 
                 if(compila.cardlist.Count!=0)
             {
 
-                Debug.Log(compila.cardlist.Count);
+              //  Debug.Log(compila.cardlist.Count);
 
                 for (int x = 0; x<compila.cardlist.Count; x++)
                 {

@@ -3043,6 +3043,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9286a0b0cc229ec47bd7008af526e36e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RowM1: {fileID: 2109357323}
+  RowR1: {fileID: 279837978}
+  RowS1: {fileID: 143153523}
+  RowM2: {fileID: 1966523467}
+  RowR2: {fileID: 551581509}
+  RowS2: {fileID: 291226029}
   Prefab: {fileID: 6322147493879926948, guid: d501aac2894fa6f44a951165634c5dd2, type: 3}
   Hand1: {fileID: 458537518}
   Hand2: {fileID: 1291691833}

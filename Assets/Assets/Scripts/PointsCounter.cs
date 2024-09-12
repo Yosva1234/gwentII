@@ -85,10 +85,10 @@ public class CounterPoints : MonoBehaviour
 
     void Update()
     {
-        ActualizePoints();
+      //  ActualizePoints();
         ActualizeVisual();
-        CalculeTotalPoints();
-        ActualizeTotalPoints();
+      //  CalculeTotalPoints();
+       // ActualizeTotalPoints();
     }
 
 }

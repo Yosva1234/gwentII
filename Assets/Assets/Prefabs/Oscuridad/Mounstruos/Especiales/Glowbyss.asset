@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108e8794aca6d084db806d371863e4c3, type: 3}
   m_Name: Glowbyss
   m_EditorClassIdentifier: 
-  Name: Glowbyss
+  Name: choza de duendes
   Power: 0
-  CardPhoto: {fileID: 21300000, guid: e6ec7be7d13b76742924ae6c1112b98d, type: 3}
+  IsCreated: 0
+  CardPhoto: {fileID: 21300000, guid: 15e33dc82a8ff1e449addfa0ff422818, type: 3}
   Owner: 0
   Type: 2
   Faction: 1
-  Range: 
+  ranges: 00000000
   EffectType: 4
-  OnActivation: 
+  EffectLeader: 0

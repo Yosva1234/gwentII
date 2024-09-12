@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108e8794aca6d084db806d371863e4c3, type: 3}
   m_Name: Congelada
   m_EditorClassIdentifier: 
-  Name: Congelada
-  Power: 0
-  CardPhoto: {fileID: 21300000, guid: 0f289703ebd121645b0936741801b98c, type: 3}
+  Name: ballesta
+  Power: 6
+  IsCreated: 0
+  CardPhoto: {fileID: 21300000, guid: 3291a751cf1c1434b9cff9f3f7aa9bda, type: 3}
   Owner: 0
-  Type: 2
+  Type: 0
   Faction: 1
-  Range: 
-  EffectType: 4
-  OnActivation: 
+  ranges: 00000000
+  EffectType: 0
+  EffectLeader: 0

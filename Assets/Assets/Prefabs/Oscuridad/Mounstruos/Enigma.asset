@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108e8794aca6d084db806d371863e4c3, type: 3}
   m_Name: Enigma
   m_EditorClassIdentifier: 
-  Name: Enigma
-  Power: 2
-  CardPhoto: {fileID: 21300000, guid: d8084fb4951f6214c9fb6cda44e7f722, type: 3}
+  Name: barril de duende
+  Power: 3
+  IsCreated: 0
+  CardPhoto: {fileID: 21300000, guid: ea8926918c71e0248be3f01ff590125d, type: 3}
   Owner: 0
   Type: 1
   Faction: 1
-  Range: 000000000100000002000000
+  ranges: 0000000002000000
   EffectType: 1
-  OnActivation: 
+  EffectLeader: 0
